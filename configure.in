@@ -3,6 +3,7 @@ dnl Ding Peilong <77676182@qq.com>
 AC_INIT(event.c)
 
 AM_INIT_AUTOMAKE(libevent,0.7c)
+AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
 dnl Checks for programs.
@@ -10,5 +11,20 @@ AC_PROG_CC
 AC_PROG_RANLIB
 AC_PROG_INSTALL
 AC_PROG_LN_S
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS(inttypes.h stdint.h poll.h signal.h unistd.h sys/epoll.h sys/time.h sys/queue.h sys/event.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_TIME
+
+dnl Checks for library functions.
+
+haveselect=no
+AC_CHECK_FUNCS(select, [haveselect=yes], )
+if test "x$haveselect" = "xyes" ; then
+	AC_LIBOBJ(select)
+fi
 
 AC_OUTPUT(Makefile sample/Makefile)

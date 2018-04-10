@@ -5,6 +5,11 @@ struct event {
 
 };
 
+struct eventop {
+    char *name;
+    void *(*init)(void);
+};
+
 void event_init(void);
 
 #endif /* _EVENT_H_ */

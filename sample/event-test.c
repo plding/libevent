@@ -39,6 +39,7 @@ main(int argc, char **argv)
 
     fprintf(stderr, "Write data to %s\n", fifo);
 
+    /* Initialize the event library */
     event_init();
 
     return 0;
