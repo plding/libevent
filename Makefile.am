@@ -1,7 +1,7 @@
 AUTOMAKE_OPTIONS = foreign no-dependencies
 
 CFLAGS = -Wall @CFLAGS@
-SUBDIRS = . sample
+SUBDIRS = . sample test
 
 lib_LIBRARIES = libevent.a
 

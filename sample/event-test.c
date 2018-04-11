@@ -8,6 +8,13 @@
 
 #include <event.h>
 
+void
+fifo_read(int fd, short event, void *arg)
+{
+    fprintf(stderr, "fifo_read called with fd: %d, event: %d, arg: %p\n",
+            fd, event, arg);
+}
+
 int
 main(int argc, char **argv)
 {
@@ -41,6 +48,12 @@ main(int argc, char **argv)
 
     /* Initialize the event library */
     event_init();
+
+    /* Initialize one event */
+    event_set(&evfifo, socket, EV_READ, fifo_read, &evfifo);
+
+    /* Add it to the active events, without a timeout */
+    event_add(&evfifo, NULL);
 
     return 0;
 }

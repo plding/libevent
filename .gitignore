@@ -10,3 +10,4 @@ configure
 install-sh
 libevent.a
 missing
+config.h.in
