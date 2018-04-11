@@ -27,4 +27,4 @@ if test "x$haveselect" = "xyes" ; then
 	AC_LIBOBJ(select)
 fi
 
-AC_OUTPUT(Makefile sample/Makefile)
+AC_OUTPUT(Makefile sample/Makefile test/Makefile)

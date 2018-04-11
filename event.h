@@ -1,6 +1,10 @@
 #ifndef _EVENT_H_
 #define _EVENT_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <sys/queue.h>
 
 #define EVLIST_TIMEOUT  0x01
@@ -17,6 +21,7 @@
 
 struct event {
     TAILQ_ENTRY (event) ev_next;
+    TAILQ_ENTRY (event) ev_active_next;
 
     int ev_fd;
     short ev_events;
@@ -38,11 +43,23 @@ struct eventop {
     char *name;
     void *(*init)(void);
     int (*add)(void *, struct event *);
+    int (*del)(void *, struct event *);
+    int (*recalc)(void *, int);
+    int (*dispatch)(void *, struct timeval *);
 };
 
 void event_init(void);
+int event_dispatch(void);
+
+int event_loop(int);
 
 void event_set(struct event *, int, short, void (*)(int, short, void *), void *);
 int event_add(struct event *, struct timeval *);
+int event_del(struct event *);
+void event_active(struct event *, int, short);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _EVENT_H_ */

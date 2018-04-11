@@ -10,4 +10,8 @@ configure
 install-sh
 libevent.a
 missing
+config.h
 config.h.in
+.tags
+.tags_sorted_by_file
+stamp-h1
